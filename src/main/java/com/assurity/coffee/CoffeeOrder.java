@@ -21,8 +21,41 @@ public class CoffeeOrder implements Comparable {
         return customerType;
     }
 
+    private int getCustomerPriority() {
+        if (customerType < 11) {
+            return 0;
+        } else if (customerType < 91) {
+            return 10;
+        } else {
+            return 20;
+        }
+    }
+
     @Override
     public int compareTo(Object o) {
-        return this.customerType - ((CoffeeOrder)o).customerType;
+        CoffeeOrder other = (CoffeeOrder)o;
+        int thisPriority = getCustomerPriority();
+        int otherPriority = other.getCustomerPriority();
+        if (thisPriority == otherPriority) {
+            return this.timeStamp - other.timeStamp;
+        } else {
+            return thisPriority - otherPriority;
+        }
+    }
+
+    public int getProductCode() {
+        return productCode;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public CoffeeSize getSize() {
+        return size;
+    }
+
+    public int getTimeStamp() {
+        return timeStamp;
     }
 }
