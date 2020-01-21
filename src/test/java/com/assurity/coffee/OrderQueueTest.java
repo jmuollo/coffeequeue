@@ -21,23 +21,22 @@ public class OrderQueueTest {
     @Before
     public void setup() {
         testQueue = new OrderQueue();
-        mediumPriorityOrder = new CoffeeOrder(MEDIUM_PRIORITY_CUSTOMER,3,1, SIX_OZ, 1000);
-        highPriorityOrder = new CoffeeOrder(HIGH_PRIORITY_CUSTOMER1,3,1, SIX_OZ, 1000);
-        highPriorityOrderEarliest = new CoffeeOrder(HIGH_PRIORITY_CUSTOMER_EARLIEST,3,1, SIX_OZ, 0);
+        mediumPriorityOrder = new CoffeeOrder(MEDIUM_PRIORITY_CUSTOMER,3, (byte) 1, SIX_OZ, 1000);
+        highPriorityOrder = new CoffeeOrder(HIGH_PRIORITY_CUSTOMER1,3, (byte) 1, SIX_OZ, 1000);
+        highPriorityOrderEarliest = new CoffeeOrder(HIGH_PRIORITY_CUSTOMER_EARLIEST,3, (byte) 1, SIX_OZ, 0);
     }
 
     @Test
     public void addOrder() {
-        CoffeeOrder coffeeOrder = new CoffeeOrder(HIGH_PRIORITY_CUSTOMER1,3,1,SIX_OZ, 0);
         assertTrue(testQueue.isEmpty());
-        QueueResult queueResult = testQueue.addOrder(coffeeOrder);
+        QueueResult queueResult = testQueue.addOrder(mediumPriorityOrder);
         assertEquals(0, queueResult.code);
         assertEquals(1, testQueue.size());
     }
 
     @Test
     public void addInvalidOrder() {
-        CoffeeOrder invalidOrder = new CoffeeOrder(-1, 0, 1, SIXTEEN_OZ, 0);
+        CoffeeOrder invalidOrder = new CoffeeOrder(-1, 0, (byte) 1, SIXTEEN_OZ, 0);
         QueueResult queueResult = testQueue.addOrder(invalidOrder);
         assertEquals(-1, queueResult.code);
         assertEquals("Invalid customer order type", queueResult.message);
