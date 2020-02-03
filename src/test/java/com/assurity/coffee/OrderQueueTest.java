@@ -70,8 +70,7 @@ public class OrderQueueTest {
     public void cancelOrder() {
         testQueue.addOrder(highPriorityOrder);
         testQueue.addOrder(mediumPriorityOrder);
-        QueueResult queueResult = testQueue.cancelOrder(highPriorityOrder);
-        assertEquals(0, queueResult.code);
+        assertTrue(testQueue.cancelOrder(highPriorityOrder));
         assertEquals(1, testQueue.size());
         CoffeeOrder nextOrder = testQueue.getNextOrder();
         assertEquals(MEDIUM_PRIORITY_CUSTOMER, nextOrder.getCustomerType());

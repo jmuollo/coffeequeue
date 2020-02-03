@@ -27,11 +27,7 @@ public class OrderQueue {
         return priorityQueue.poll();
     }
 
-    public QueueResult cancelOrder(CoffeeOrder coffeeOrder) {
-        if (!priorityQueue.contains(coffeeOrder)) {
-            return new QueueResult(-2, "No order found");
-        }
-        priorityQueue.remove(coffeeOrder);
-        return new QueueResult(0, "Success");
+    public boolean cancelOrder(CoffeeOrder coffeeOrder) {
+        return priorityQueue.remove(coffeeOrder);
     }
 }
